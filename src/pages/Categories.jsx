@@ -6,7 +6,7 @@ function Categories() {
     const [categories, setCategories] = useState([])
 
     useEffect(()=>{
-        getData(setCategories, "http://localhost:9000/category");
+        getData(setCategories, "https://api-production-6a5a.up.railway.app/category");
     }, []);
 
     return (

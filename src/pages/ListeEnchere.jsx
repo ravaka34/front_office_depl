@@ -11,8 +11,8 @@ function ListeEnchere() {
     const [encheres, setEncheres] = useState([])
 
     useEffect(()=>{
-        getData(setEncheres, "http://localhost:9000/auction-state/category/"+categoryId);
-        getData(setCategory, "http://localhost:9000/category/"+categoryId);
+        getData(setEncheres, "https://api-production-6a5a.up.railway.app/auction-state/category/"+categoryId);
+        getData(setCategory, "https://api-production-6a5a.up.railway.app/category/"+categoryId);
     }, []);
     
     console.log(encheres)

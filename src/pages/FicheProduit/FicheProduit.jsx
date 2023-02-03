@@ -1,10 +1,8 @@
 import moment from "moment";
 import { useState, useEffect } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import fleur1 from '../../images/fleur1.jpg';
-import fleur2 from '../../images/fleur2.jpg';
 import { getProfil } from "../../utils/util";
 import { useCheckConnected } from "../../hooks/UseCheckConnected";
 import { postData } from "../../utils/fetch";
@@ -25,16 +23,13 @@ export const FicheProduit = ()=> {
     const [betList, setBetList] = useState();
 
     useEffect(()=>{
-        fetch("http://localhost:9000/auction-state/"+id)
+        fetch("https://api-production-6a5a.up.railway.app/auction-state/"+id)
         .then((state)=>state.json())
         .then((auctionStates )=> auctionStates.data)
         .then((result)=>{
             setAuctionState(result);
-             setBetList(auctionState.auctionBetList);   
-            }
-        )
-
-
+            setBetList(auctionState.auctionBetList);   
+        })
 
         console.log(auctionState);
     }, []);
@@ -56,9 +51,10 @@ export const FicheProduit = ()=> {
     const handleSubmit = async (e)=> {
         e.preventDefault();
         console.log(prepareData());
-        const url = "http://localhost:9000/auction/"+auctionState.id+"/bet?clientId="+profil.client.id+"&token="+profil.token;
+        const url = "https://api-production-6a5a.up.railway.app/auction/"+auctionState.id+"/bet?clientId="+profil.client.id+"&token="+profil.token;
         console.log(url);
         const state = await postData(url, prepareData());
+
         window.alert("Wait for the response");
         if (state.data) {
           console.log(state.data);
@@ -77,6 +73,33 @@ export const FicheProduit = ()=> {
           setBetList(newBetList);
         } else {
           setResponse(state.error.message);
+        }
+    }
+
+    const lastAuction = ()=> {
+        if (auctionState.auctionBetList[auctionState.auctionBetList.length -1].amount) {
+            return  (parseFloat(auctionState?.auctionBetList[auctionState?.auctionBetList.length -1]?.amount).toLocaleString(undefined, {maximumFractionDigits:2}) + "Ar le "+ moment(auctionState?.auctionBetList[auctionState?.auctionBetList.length -1]?.dateBet).format("DD MMMM YYYY"));
+        } else {
+            return "";
+        }
+    }
+
+    const encherir = ()=> {
+        if(auctionState?.isFinished === 1){
+            // console.log("isfinished" + data.isFinished);
+            return (
+                <div className="alert alert-warning">
+                    Enchere termine
+                </div>    
+            )
+        }else{
+            return (
+                <form onSubmit={handleSubmit}>
+                    <p>Encherir: <input type="number" step="any" onChange={handleChange} /></p>
+                    <CardError error={response} />
+                    <input type="submit" value="Encherir" />
+                </form>
+            )
         }
     }
 
@@ -109,10 +132,14 @@ export const FicheProduit = ()=> {
                         <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src={fleur1} class="d-block w-100" alt="..." />
+                                    <img src={auctionState?.productPictureList[0]?.picture} class="d-block w-100" alt="..." />
                                 </div>
                                 <div class="carousel-item">
-                                    <img src={fleur2} class="d-block w-100" alt="..." />
+                                    {auctionState?.productPictureList.map((image)=>{
+                                        return (
+                                            <img src={image?.picture} class="d-block w-100" alt="..." />
+                                        );
+                                    })}
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
@@ -126,6 +153,7 @@ export const FicheProduit = ()=> {
                             </div>
                         </div>
                         <div className="right-content col-md-6" >
+                            <h3><strong>Enchere de: </strong>{auctionState?.client.firstName} {auctionState?.client.lastName}</h3>
                             <h3><strong>Lot {auctionState?.id}:</strong>  {auctionState?.productName}</h3>
                             <div>
                                 <h4><strong>Description produit:</strong> {auctionState?.productDescription}</h4>
@@ -133,14 +161,10 @@ export const FicheProduit = ()=> {
                             <div>
                                 <p>Debut enchere: <strong>{moment(auctionState?.depositoryDate).format("DD MMMM YYYY hh:mm a")}</strong></p>
                                 <p>Fin enchere: <strong>{moment(auctionState?.endDate).format("DD MMMM YYYY hh:mm a")}</strong></p>
-                                <p>Prix initial: <strong>{auctionState?.amountMin} Ar</strong></p>
-                                <p>Derniere enchere: <strong>{auctionState?.auctionBetList[auctionState?.auctionBetList.length -1]?.amount} Ar le {moment(auctionState?.auctionBetList[auctionState?.auctionBetList.length -1]?.dateBet).format("DD MMMM YYYY")}</strong></p>
+                                <p>Prix initial: <strong>{parseFloat(auctionState?.amountMin).toLocaleString(undefined, {maximumFractionDigits:2})} Ar</strong></p>
+                                <p>Derniere enchere: <strong>{lastAuction}</strong></p>
                                 <hr />
-                                <form onSubmit={handleSubmit}>
-                                    <p>Encherir: <input type="number" step="any" onChange={handleChange} /></p>
-                                    <CardError error={response} />
-                                    <input type="submit" value="Encherir" />
-                                </form>
+                                {encherir}
                                 < br/>
                                 <p>{ renderIsFinished() }</p>
                             </div>
@@ -162,7 +186,7 @@ export const FicheProduit = ()=> {
                                     <td>{auctionStatee?.client.firstName}</td>
                                     <td>{auctionStatee?.client.lastName}</td>
                                     <td>{auctionStatee?.dateBet}</td>
-                                    <td>{auctionStatee?.amount}</td>
+                                    <td>{parseFloat(auctionStatee?.amount).toLocaleString(undefined, {maximumFractionDigits:2})}</td>
                                 </tr>
                             )}
                         </tbody>

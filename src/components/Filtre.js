@@ -20,7 +20,7 @@ export default function Filtre(props) {
         category : props.category
     }
     console.log(data);
-    const filters = await postData("http://localhost:9000/auction-state/search", data);
+    const filters = await postData("https://api-production-6a5a.up.railway.app/auction-state/search", data);
     props.setData(filters.data);
   }
 

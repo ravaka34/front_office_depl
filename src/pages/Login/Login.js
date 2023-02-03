@@ -24,7 +24,7 @@ export default function Login() {
       password: pwd.current.value,
     };
     console.log(data);
-    const state = await postData("http://localhost:9000/login", data);
+    const state = await postData("https://api-production-6a5a.up.railway.app/login", data);
     if (state.data) {
       console.log(state.data);
       localStorage.setItem("profil", JSON.stringify(state.data));

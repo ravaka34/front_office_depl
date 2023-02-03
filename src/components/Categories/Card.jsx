@@ -6,25 +6,28 @@ export const Card = ({ data, style }) => {
   console.log(data);
 
   return (
-    <div className="card">
-      <img
-        src={data?.picture}
-        alt="No image"
-        style={{ ...style, width: "100%" }}
-      />
-      <div className="container">
-        <h4>
-          <b>
-            <Link
-              className="stretched-link"
-              to={"/liste-enchere"}
-              state={{ id: data?.id }}
-            >
-              {" "}
-              {data?.name}{" "}
-            </Link>
-          </b>
-        </h4>
+    <div id="mycards" class="card-content d-flex">
+      <div className="card">
+        <div class="card-image">
+            <img
+              src={data?.picture}
+              alt="No image"
+            />
+        </div>
+        <div class="card-info mt-2" >
+          <h4>
+            <b>
+              <Link
+                className="stretched-link"
+                to={"/liste-enchere"}
+                state={{ id: data?.id }}
+              >
+                {" "}
+                {data?.name}{" "}
+              </Link>
+            </b>
+          </h4>
+        </div>
       </div>
     </div>
   );

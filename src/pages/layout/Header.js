@@ -19,7 +19,7 @@ export default function Header() {
         <div className="d-flex align-items-center justify-content-between">
           <div className="logo">
             <div className="site-logo">
-              <a href="index.html" className="js-logo-clone">
+              <a href="/home" className="js-logo-clone">
                 MG AUCTION
               </a>
             </div>
@@ -34,7 +34,7 @@ export default function Header() {
                   <Link to="/mes-encheres">Mes encheres</Link>
                 </li>
                 <li>
-                  <a href="#">Login</a>
+                  <Link to="/login">Login</Link>
                 </li>
               </ul>
             </nav>

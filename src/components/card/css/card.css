@@ -1,10 +1,46 @@
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    border-radius: 5px; /* 5px rounded corners */
-  }
-  
-  /* Add rounded corners to the top left and the top right corner of the image */
-  img {
-    border-radius: 5px 5px 0 0;
-  }
+#mycards .card-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 30px;
+}
+
+#mycards .card{
+  position: relative;
+  background: #fff;
+  max-width: 325px;
+  width: 325px;
+  height: auto;
+  margin: 25px;
+  box-shadow: 0 5px 25px rgb(1 1 1 / 20%);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#mycards .card-image{
+  max-height: 240px;
+  overflow: hidden;
+}
+
+#mycards .card-image img{
+  max-width: 100%;
+  height: auto;
+}
+
+#mycards .card-info{
+  position: relative;
+  color: #222;
+  padding: 10px 20px 20px;
+}
+
+#mycards .card-info h3{
+  font-size: 1.8em;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+#mycards .card-info p{
+  font-size: 1em;
+  margin-bottom: 5px;
+}

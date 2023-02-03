@@ -21,26 +21,6 @@ export default function Footer() {
                   </li>
                 </ul>
             </div>
-            <div className="block-7">
-              <form action="#" method="post">
-                <label for="email_subscribe" className="footer-heading">
-                  Subscribe
-                </label>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className="form-control py-4"
-                    id="email_subscribe"
-                    placeholder="Email"
-                  />
-                  <input
-                    type="submit"
-                    className="btn btn-sm btn-primary"
-                    value="Send"
-                  />
-                </div>
-              </form>
-            </div>
           </div>
           <div className="col-lg-5 ml-auto mb-5 mb-lg-0">
             <div className="row">
@@ -50,13 +30,13 @@ export default function Footer() {
               <div className="col-md-6 col-lg-4">
                 <ul className="list-unstyled">
                   <li>
-                    <a >ETU00</a>
+                    <a >ETU001487</a>
                   </li>
                   <li>
-                    <a >ETU00</a>
+                    <a >ETU001399</a>
                   </li>
                   <li>
-                    <a >ETU00</a>
+                    <a >ETU001638</a>
                   </li>
                   <li>
                     <a >ETU001657</a>
@@ -73,7 +53,7 @@ export default function Footer() {
                   102 Antananarivo Madagascar, Andoharanofotsy
                 </li>
                 <li className="phone">
-                  <a>+261 33 333 33</a>
+                  <a>+261 32 81 386 90</a>
                 </li>
               </ul>
             </div>

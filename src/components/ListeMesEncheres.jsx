@@ -6,7 +6,7 @@ function ListeMesEncheres() {
     const [encheres, setEncheres] = useState([]);
 
     useEffect(()=>{
-        fetch("http://localhost:9000/client/"+clientId+"/auction")
+        fetch("https://api-production-6a5a.up.railway.app/client/"+clientId+"/auction")
         .then((encheres)=>encheres.json())
         .then((liste)=>setEncheres(liste.data))
     }, []);

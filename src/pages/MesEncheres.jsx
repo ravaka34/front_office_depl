@@ -13,8 +13,8 @@ function MesEncheres() {
     
 
     useEffect(()=>{
-        getData(setEncheres, "http://localhost:9000/client/"+clientId+"/auction-state");
-        getData(setBalance, "http://localhost:9000/client/"+clientId+"/balance");
+        getData(setEncheres, "https://api-production-6a5a.up.railway.app/client/"+clientId+"/auction-state");
+        getData(setBalance, "https://api-production-6a5a.up.railway.app/client/"+clientId+"/balance");
     }, []);
     
     console.log(encheres)
@@ -26,7 +26,7 @@ function MesEncheres() {
                 <h1 className="h1 mb-3 text-black">Votre profil</h1>
                 <h5 className="h5 mb-3 text-black">Nom: {profil?.client.firstName}</h5>
                 <h5 className="h5 mb-3 text-black">Prenom: {profil?.client.lastName}</h5>
-                <h5 className="h5 mb-3 text-black">Votre solde actuel: {balance?.amount} Ariary</h5>
+                <h5 className="h5 mb-3 text-black">Votre solde actuel: {balance?.amount.toLocaleString(undefined, {maximumFractionDigits:2})} Ariary</h5>
                 <h1 className="h1 mb-3 text-black">Mes enchères</h1>
                     <div className="row">
                         <ListProducts liste={encheres} />
