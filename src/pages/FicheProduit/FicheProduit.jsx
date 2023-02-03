@@ -89,7 +89,7 @@ export const FicheProduit = ()=> {
             // console.log("isfinished" + data.isFinished);
             return (
                 <div className="alert alert-warning">
-                    Enchere termine
+                    
                 </div>    
             )
         }else{
@@ -164,7 +164,7 @@ export const FicheProduit = ()=> {
                                 <p>Prix initial: <strong>{parseFloat(auctionState?.amountMin).toLocaleString(undefined, {maximumFractionDigits:2})} Ar</strong></p>
                                 <p>Derniere enchere: <strong>{lastAuction}</strong></p>
                                 <hr />
-                                {encherir}
+                                {encherir()}
                                 < br/>
                                 <p>{ renderIsFinished() }</p>
                             </div>
