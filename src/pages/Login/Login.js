@@ -54,6 +54,7 @@ export default function Login() {
                 <input
                   className="form-control input-group"
                   type="email"
+                  value="candy@gmail.com"
                   placeholder="Votre e-mail"
                   ref={email}
                   required
@@ -61,6 +62,7 @@ export default function Login() {
                 <input
                   className="form-control input-group"
                   type="password"
+                  value="candy"
                   placeholder="Votre mot de passe"
                   ref={pwd}
                   required

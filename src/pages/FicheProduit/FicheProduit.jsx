@@ -88,9 +88,9 @@ export const FicheProduit = ()=> {
         if(auctionState?.isFinished === 1){
             // console.log("isfinished" + data.isFinished);
             return (
-                <div className="alert alert-warning">
+                <>
                     
-                </div>    
+                </>    
             )
         }else{
             return (
